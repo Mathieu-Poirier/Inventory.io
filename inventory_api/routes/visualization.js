@@ -2,6 +2,8 @@
 const express = require('express');
 const router = express.Router();
 const { Pool } = require('pg');
+const query = `SELECT parts_made FROM efficiency;`;
+
 
 // Create a PostgreSQL connection pool
 const pool = new Pool({
@@ -17,9 +19,10 @@ const pool = new Pool({
 
 // Define a route
 router.get('/visualization', async (req, res) => {
-    const result = await pool.query('SELECT parts_made FROM efficiency');
+    const result = await pool.query(query);
+    const value = result.rows[0]['parts_made'];
     // Send the query result as a JSON response
-    res.json(result.rows);
+    res.json(value);
 });
 
 module.exports = router;
