@@ -1,9 +1,11 @@
-const express = require('express');
+import express from 'express';
+import cors from 'cors';
 const app = express();
 const port = 3000; // You can set your desired port
 
-const visualizationRoute = require('./routes/visualization');
+app.use(cors());
 
+import visualizationRoute from './routes/visualization.mjs';
 // Define a route
 app.use('/', visualizationRoute);
 
